@@ -3,14 +3,14 @@ package com.pg.payment.entity;
 import com.pg.payment.enumtype.ResultType;
 import com.pg.payment.enumtype.TransactionType;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PaymentTransaction {
     @Id
