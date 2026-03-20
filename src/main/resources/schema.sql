@@ -1,3 +1,4 @@
+-- DROP DATABASE IF EXISTS pg_db;
 CREATE DATABASE IF NOT EXISTS pg_db;
 USE pg_db;
 
@@ -5,7 +6,7 @@ USE pg_db;
 -- 1. merchant
 -- 가맹점 정보
 -- ==============================
-CREATE TABLE merchant (
+CREATE TABLE IF NOT EXISTS merchant (
                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
                           merchant_uid VARCHAR(50) NOT NULL UNIQUE,
                           name VARCHAR(100) NOT NULL,
@@ -20,13 +21,14 @@ CREATE TABLE merchant (
 -- 2. payment
 -- 결제 본체(현재 상태 관리)
 -- ==============================
-CREATE TABLE payment (
+CREATE TABLE IF NOT EXISTS payment (
                          id BIGINT AUTO_INCREMENT PRIMARY KEY,
                          payment_uid VARCHAR(50) NOT NULL UNIQUE,
                          merchant_id BIGINT NOT NULL,
                          order_id VARCHAR(100) NOT NULL,
                          product_name VARCHAR(200) NOT NULL,
                          amount BIGINT NOT NULL,
+                         payment_method VARCHAR(20) NOT NULL,
                          status VARCHAR(30) NOT NULL,
                          approval_code VARCHAR(50),
                          failure_code VARCHAR(50),
@@ -47,7 +49,7 @@ CREATE TABLE payment (
 -- 3. payment_transaction
 -- 승인/취소 이력
 -- ==============================
-CREATE TABLE payment_transaction (
+CREATE TABLE IF NOT EXISTS payment_transaction (
                                      id BIGINT AUTO_INCREMENT PRIMARY KEY,
                                      transaction_uid VARCHAR(50) NOT NULL UNIQUE,
                                      payment_id BIGINT NOT NULL,
@@ -69,7 +71,7 @@ CREATE TABLE payment_transaction (
 -- 4. webhook_history
 -- 가맹점 웹훅 발송 이력
 -- ==============================
-CREATE TABLE webhook_history (
+CREATE TABLE IF NOT EXISTS webhook_history (
                                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
                                  payment_id BIGINT NOT NULL,
                                  merchant_id BIGINT NOT NULL,

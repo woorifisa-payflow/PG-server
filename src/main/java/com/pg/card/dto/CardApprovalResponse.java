@@ -21,4 +21,8 @@ public class CardApprovalResponse {
     public boolean isFailed() {
         return !success;
     }
+
+    public Long getAmount() {
+        return null;
+    }
 }
